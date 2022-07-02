@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Start is called before the first frame update
+    /// Start is called before the first frame update.
     /// </summary>
     void Start()
     {
