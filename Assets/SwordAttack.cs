@@ -4,45 +4,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// SwordAttack class.
+/// </summary>
 public class SwordAttack : MonoBehaviour
 {
     public Collider2D swordCollider;
     public float damage = 3;
     Vector2 rightAttackOffset;
 
-    private void Start()
-    {
-        rightAttackOffset = transform.position;
-    }
-
+    /// <summary>
+    /// Attacks to the right.
+    /// </summary>
     public void AttackRight()
     {
-        swordCollider.enabled = true;
-        transform.localPosition = rightAttackOffset;
+        this.swordCollider.enabled = true;
+        this.transform.localPosition = this.rightAttackOffset;
     }
 
+    /// <summary>
+    /// Attacks to the left.
+    /// </summary>
     public void AttackLeft()
     {
-        swordCollider.enabled = true;
-        transform.localPosition = new Vector3(rightAttackOffset.x * -1, rightAttackOffset.y);
+        this.swordCollider.enabled = true;
+        this.transform.localPosition = new Vector3(this.rightAttackOffset.x * -1, this.rightAttackOffset.y);
     }
 
+    /// <summary>
+    /// Stops an attack.
+    /// </summary>
     public void StopAttack()
     {
-        swordCollider.enabled = false;
+        this.swordCollider.enabled = false;
     }
 
+    /// <summary>
+    /// Called when the game loads.
+    /// </summary>
+    private void Start()
+    {
+        this.rightAttackOffset = this.transform.localPosition;
+    }
+
+    /// <summary>
+    /// Checks to see if the sword collided with the enemy, if so deals damage.
+    /// </summary>
     private void OnTriggerEnter2D(Collider2D other)
     {
+        print("trigger");
         if (other.tag == "Enemy")
         {
-            // Deal damage to the enemy
-            //Enemy enemy = other.GetComponent<Enemy>();
+            print("hit");
 
-            //if (enemy != null)
-            //{
-                //enemy.Health -= damage;
-            //}
+            // Deal damage to the enemy
+            Enemy enemy = other.GetComponent<Enemy>();
+
+            if (enemy != null)
+            {
+                enemy.Health -= this.damage;
+            }
         }
     }
 }
